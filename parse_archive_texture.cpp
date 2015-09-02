@@ -18,6 +18,24 @@ int main(void)
 
 	ofstream wgetfile("wget_images.sh");
 
+
+	ifstream archive_texture_pages("archive_pages.txt");
+
+	while(1)
+	{
+		archive_texture_pages.getline(line_string,500);
+
+		if ( archive_texture_pages.eof() ) 
+			break;
+
+		std::string webpage = std::string("archivetextures.net/") + std::string(line_string);
+
+		webpage = std::string("wget ") + std::string(webpage) + std::string(" -O archive_tex.html");
+
+		std::cout << webpage << std::endl;
+
+		continue;
+
 	while(1)
 	{
 		
@@ -74,7 +92,7 @@ int main(void)
 		matName.close();
 		
 		
-		if ( !line_str.empty())
+		if ( !line_str.empty() )
 		{
 			wgetfile << "wget " << line_str<<" "<< materialName << std::endl;
 		}
@@ -96,14 +114,18 @@ int main(void)
 		}
 		//closedir(dir);
 
-		if ( count >=2 )
-		break;
+		//if ( count >=2 )
+		//break;
 				
 		i+=10;
 
 		count++;
 		
 	}
+
+	}
+	
+	archive_texture_pages.close();
 
 	wgetfile.close();
 
