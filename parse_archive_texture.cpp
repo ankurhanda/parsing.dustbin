@@ -11,8 +11,6 @@ using namespace std;
 int main(void)
 {
 
-	int i =2;	
-	int count=0;
 
 	char line_string[500];
 
@@ -33,9 +31,13 @@ int main(void)
 		webpage = std::string("wget ") + std::string(webpage) + std::string(" -O archive_tex.html");
 
 		std::cout << webpage << std::endl;
+		
+		system(webpage.c_str());
+		//continue;
 
-		continue;
-
+		int i =2;	
+		int count=0;
+	
 	while(1)
 	{
 		
@@ -43,7 +45,7 @@ int main(void)
 		
 		sprintf(fileName,"grep -R \"?a=download\" archive_tex.html | sed 's/<\\/a><\\/div><div>/\\r/g' | cut -f%d -d'\"' > download_link.txt",i);
 
-		std::cout<<fileName<<std::endl;
+		//std::cout<<fileName<<std::endl;
 
 		system(fileName);
 		
@@ -76,6 +78,8 @@ int main(void)
 
 		
 		system("xsel > image.txt");
+
+		system("xdotool key --clearmodifiers \"ctrl+w\"");
 
 		ifstream imgFile("image.txt");
 		imgFile.getline(line_string,300);
@@ -114,8 +118,8 @@ int main(void)
 		}
 		//closedir(dir);
 
-		//if ( count >=2 )
-		//break;
+//		if ( count >=2 )
+//			break;
 				
 		i+=10;
 
